@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pages on Keehun Nam</title>
+    <link>https://keehun.dev/pages/</link>
+    <description>Recent content in Pages on Keehun Nam</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 28 Jan 2019 19:38:56 -0600</lastBuildDate>
+    
+	<atom:link href="https://keehun.dev/pages/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Contact Me</title>
+      <link>https://keehun.dev/contact/</link>
+      <pubDate>Mon, 28 Jan 2019 19:38:56 -0600</pubDate>
+      
+      <guid>https://keehun.dev/contact/</guid>
+      <description>From      Subject      Message        Send message       </description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://keehun.dev/about/</link>
+      <pubDate>Sun, 20 Jan 2019 19:26:16 -0600</pubDate>
+      
+      <guid>https://keehun.dev/about/</guid>
+      <description>I am currently a Software Developer at Livefront where I help develop some of the most remarkable experiences and applications available on the iOS platform.
+I am trained as an orchestral conductor, and I am working with some of my best friends on creating refreshing, authentic concerts of contemporary music connecting audiences with composers at un/pitched.
+I am committed to helping devoted individuals get better at both classical music and mobile application development.</description>
+    </item>
+    
+  </channel>
+</rss>

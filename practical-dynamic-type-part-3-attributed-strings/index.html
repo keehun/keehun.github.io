@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://keehun.dev/scss/style.min.3cf659a3db2801d1078cfa075027fb3f41972950377529ef910ccfdb1adffb49.css" integrity="sha256-PPZZo9soAdEHjPoHUCf7P0GXKVA3dSnvkQzP2xrf&#43;0k=" media="screen">
+  <link rel="stylesheet" href="/css/bulma.css" media="screen">
+  <link rel="stylesheet" href="/webfonts/lora/lora.css" type="text/css" charset="utf-8" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Keehun Nam">
+  <title>Practical Dynamic Type Part 3: Attributed Strings - Keehun Nam</title>
+</head>
+
+<body><header class="section">
+  <div class="container">
+    <br/>
+    <div class="level">
+      <div class="level-left">
+        <div class="level-item">
+          <img class="image is-rounded is-32x32" src="/img/keehun.png">
+        </div>
+        <div class="level-item">
+          <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
+            <ul>
+              <li><a href="/">Keehun Nam</a></li><li class="is-active"><a href="https://keehun.dev/practical-dynamic-type-part-3-attributed-strings/" aria-current="page">Practical Dynamic Type Part 3: Attributed Strings</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+
+<section class="section">
+    <div class="container is-fluid">
+        <div class="columns is-centered is-mobile">
+            <div class="column is-full">
+                <article itemscope itemtype="http://schema.org/BlogPosting">
+                    <h1 class="title has-text-centered" itemprop="headline">Practical Dynamic Type Part 3: Attributed Strings</h1>
+                    
+                    <h2 class="subtitle is-5 has-text-centered"><time itemprop="datePublished" datetime="2019-02-15">February 15, 2019</time></h2>
+                    
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hero is-medium">
+    <div class="hero-body">
+        <div class="container">
+            <img class="is-aspect-fill" src="https://keehun.dev/practical-dynamic-type-part-3-attributed-strings//san-francisco-font-family-tree.png" />
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-fluid">
+        <div class="columns is-centered is-mobile">
+            <div class="column is-full">
+                <article itemscope itemtype="http://schema.org/BlogPosting">
+                    <section class="body is-size-5" itemprop="articleBody">
+                        <div class="content">
+                            <p>Ensuring that applications remain accessible for all is one of our highest priorities at <a href="https://livefront.com">Livefront</a>, and we believe that a key component in achieving that goal is to flawlessly support Dynamic Type in all of our applications. <a href="https://medium.com/livefront/practical-dynamic-type-d2b5774e8a8a">Part 1</a> of our <em>Practical Dynamic Type</em> series focused on supporting iOS 10 and <a href="https://medium.com/livefront/practical-dynamic-type-part-2-testing-613bb845f26b">Part 2</a> focused on unit testing. This third installment will focus on Attributed Strings.</p>
+
+<p><em>You can access the complete demo app for this article,</em> <a href="https://github.com/keehun/Dynamic-Type-Part-3-Demo-Project"><em>here</em></a><em>.</em></p>
+
+<p>You may be asking: “Isn’t there already <code>adjustsFontForContentSizeCategory</code>?” You’re right! Setting aside for a moment the fact that it is not unit testable (as discussed in <a href="https://medium.com/livefront/practical-dynamic-type-part-2-testing-613bb845f26b">Part 2</a>), let’s see what happens when we assign an Attributed String to an <code>UILabel</code> with <code>adjustsFontForContentSizeCategory = true</code>.</p>
+
+<p><strong>On iOS 11 and above, everything works as expected</strong></p>
+
+<figure>
+    <img src="https://cdn-images-1.medium.com/max/1600/1*JEykPfhzsFl0a77iSyN74w.gif" alt="A gif demonstrating that Attributed Strings resize properly on iOS 12." />
+    <figcaption>UILabel on iOS 11 correctly responds to <code>adjustsFontForContentSizeCategory</code>.</figcaption>
+</figure>
+
+<p><strong>But, on iOS 10, an <code>AttributedString</code> in an <code>UILabel</code> does not respond to <code>adjustsFontForContentSizeCategory</code>.</strong></p>
+
+<figure>
+    <img src="https://cdn-images-1.medium.com/max/1600/1*xEK3TlKYu5wyLL_4xYByIA.gif" alt="A gif demonstrating that Attributed Strings does not resize properly on iOS 10." />
+    <figcaption><strong><code>UILabel</code> on iOS 10 does not respond to <code>adjustsFontForContentSizeCategory</code> due to the lack of <code>UIFontMetrics</code> on iOS 10.</strong></figcaption>
+</figure>
+
+<h2 id="let-s-fix-this">Let&rsquo;s fix this</h2>
+
+<p>It&rsquo;s clear from attempting to use <code>adjustsFontForContentSizeCategory</code> on iOS 10 that we will have to manually handle updating the font size, just as we&rsquo;ve done in <a href="https://medium.com/livefront/practical-dynamic-type-d2b5774e8a8a">Part 1</a> and <a href="https://medium.com/livefront/practical-dynamic-type-part-2-testing-613bb845f26b">Part 2</a>.</p>
+
+<p>First, let&rsquo;s define a <code>UIView</code> that hosts a <code>UILabel</code> displaying multiple attributed strings:</p>
+
+<script src="https://gist.github.com/keehun/719c9dc9abbdf56b99c6fb7d63adce6f.js"></script>
+
+<figure><figcaption>(Note that you will need to pull the <code>FontMetrics</code> class from <a href="https://medium.com/livefront/practical-dynamic-type-part-2-testing-613bb845f26b">Part 2</a>.)</figcaption></figure>
+
+<p>Second, let&rsquo;s hook into <code>FontMetric</code>&rsquo;s notification <code>FontMetricsContentSizeCategoryDidChange</code>:</p>
+
+<script src="https://gist.github.com/keehun/5a02d17c6346a22129f62396b5ccae9c.js"></script>
+
+<h3 id="what-s-next">What&rsquo;s next?</h3>
+
+<p>Whereas we&rsquo;ve been able to set the font size property on the entire <code>UILabel</code> inside the <code>uiContentSizeCategoryChanged()</code> before, now we will have to set the type size on each individual formatted segment within the <code>AttributedString</code> as each formatting segment may have different type size. Therefore, in response to <code>ContentSizeCategoryDidChange</code>, we will have to enumerate through each formatting segment of the overall <code>AttributedString</code> and update each formatted segments&rsquo; type sizes.</p>
+
+<p>Let&rsquo;s first enumerate over the <code>AttributeString</code> to access each of the four sub-attributed strings we created above:</p>
+
+<script src="https://gist.github.com/keehun/d2f2488fab89ea23a208c15971214f76.js"></script>
+
+<p>In order to calculate the new type sizes, we will need to have separate <code>FontSetter</code> closures that the enumeration block in <code>uiContentSizeCategoryChanged()</code>
+can use on each attributed substring (see lines 11, 20, 31, and 40
+below). This allows the individual attributed substring to get its type
+size regenerated with its own <code>FontSetter</code>.</p>
+
+<script src="https://gist.github.com/keehun/4227bbd386ec8b10ec3f8ac25467db27.js"></script>
+
+<p>And now, all we have to do is get a new <code>UIFont</code> with updated sizes by re-executing the <code>FontSetter</code> closure for each substring and then assigning those new fonts to the preexisting string:</p>
+
+<script src="https://gist.github.com/keehun/3818040ad94f4511e49f95bf1a5dbc38.js"></script>
+
+<figure>
+    <img src="https://cdn-images-1.medium.com/max/1600/1*Jm_yOvwm-AfdVz1zwKVuhw.gif" alt="A gif demonstrating that Attributed Strings now resize properly on iOS 10." />
+    <figcaption><code>UILabel</code> on iOS 10 now responds to Dynamic Type.</figcaption>
+</figure>
+
+<h3 id="unit-testing">Unit Testing</h3>
+
+<p>Using this technique, it is possible to unit test the Dynamic Type <code>pointSize</code> as well!</p>
+
+<script src="https://gist.github.com/keehun/a8c2d7da79d949c65b908a3affd69372.js"></script>
+
+<p>Which, as expected, passes!</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*_pfUr-jV1UwO8J7p8zs1pQ.png" alt="img" /></p>
+
+<p>Now, you can support Dynamic Type with <code>AttributedString</code> on pre-iOS 11 devices, and unit test it, too! 🍰</p>
+
+<p>You can access the complete demo app for this article <a href="https://github.com/keehun/Dynamic-Type-Part-3-Demo-Project">here</a>.  (Please note that Neutraface Slab Text font shown throughout the  article is not included, and it has been replaced with Courier.)</p>
+
+<p><strong><em>Keehun finds ways to unit test everything at <a href="https://livefront.com">Livefront</a></em></strong>.</p>
+
+<p>Thanks to <a href="https://medium.com/@collinflynn?source=post_page">Collin Flynn</a> , <a href="https://medium.com/@chris_91497?source=post_page">Chris Sessions</a> , <a href="https://medium.com/@regularberry?source=post_page">Sean Berry</a> , and <a href="https://medium.com/@livefront?source=post_page">Mike Bollinger</a> for their editorial feedback.</p>
+                        </div>
+                    </section>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+  <div class="has-text-centered">
+
+  </div>
+</footer>
+
+</body>
+</html>

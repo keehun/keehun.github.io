@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://keehun.dev/scss/style.min.3cf659a3db2801d1078cfa075027fb3f41972950377529ef910ccfdb1adffb49.css" integrity="sha256-PPZZo9soAdEHjPoHUCf7P0GXKVA3dSnvkQzP2xrf&#43;0k=" media="screen">
+  <link rel="stylesheet" href="/css/bulma.css" media="screen">
+  <link rel="stylesheet" href="/webfonts/lora/lora.css" type="text/css" charset="utf-8" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Keehun Nam">
+  <title>Practical Dynamic Type: Part 2, Testing - Keehun Nam</title>
+</head>
+
+<body><header class="section">
+  <div class="container">
+    <br/>
+    <div class="level">
+      <div class="level-left">
+        <div class="level-item">
+          <img class="image is-rounded is-32x32" src="/img/keehun.png">
+        </div>
+        <div class="level-item">
+          <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
+            <ul>
+              <li><a href="/">Keehun Nam</a></li><li class="is-active"><a href="https://keehun.dev/practical-dynamic-type-part-2-testing/" aria-current="page">Practical Dynamic Type: Part 2, Testing</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+
+<section class="section">
+    <div class="container is-fluid">
+        <div class="columns is-centered is-mobile">
+            <div class="column is-full">
+                <article itemscope itemtype="http://schema.org/BlogPosting">
+                    <h1 class="title has-text-centered" itemprop="headline">Practical Dynamic Type: Part 2, Testing</h1>
+                    
+                    <h2 class="subtitle is-5 has-text-centered"><time itemprop="datePublished" datetime="2018-08-27">August 27, 2018</time></h2>
+                    
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-fluid">
+        <div class="columns is-centered is-mobile">
+            <div class="column is-full">
+                <article itemscope itemtype="http://schema.org/BlogPosting">
+                    <section class="body is-size-5" itemprop="articleBody">
+                        <div class="content">
+                            <p>Last year, <a href="https://livefront.com">Livefront</a>&rsquo;s software developer <a href="https://medium.com/@chris_91497">Chris Sessions</a> wrote a <a href="https://medium.com/livefront/practical-dynamic-type-d2b5774e8a8a">helpful article</a> about practical usage of Dynamic Type. This short follow-up addresses one primary concern: <em>Unit Testing</em>.</p>
+
+<p>Since <code>adjustsFontForContentSizeCategory</code> cannot be unit tested, let’s make our own!</p>
+
+<hr />
+
+<p>Here is an example of a view that incorporates Dynamic Type features using Chris’s <code>FontMetrics</code> wrapper from <a href="https://medium.com/livefront/practical-dynamic-type-d2b5774e8a8a">Part 1</a>:</p>
+
+<script src="https://gist.github.com/keehun/af0a7bdacddc0788f2478ba79e81b3ec.js"></script>
+
+<h4 id="that-is-not-unit-testable-what-are-we-going-to-do-about-it">That is not unit–testable. What are we going to do about it?</h4>
+
+<p>The reason that we cannot unit-test whether or not the label responds to Dynamic Type is that it is not possible to write to the system’s Dynamic Type setting: <code>UIScreen.main.traitCollection.preferredContentSizeCategory</code>. It is a read-only source of the current system-wide setting. One possible solution (and the one we happen to use at Livefront) is to disregard the system’s <code>preferredContentSizeCategory</code> and use our own “source of truth” for the <code>UIContentSizeCategory</code>. This works because of two key reasons:</p>
+
+<ol>
+<li>Our <code>FontMetrics</code> can observe the system’s Dynamic Type size change and read the new size.</li>
+<li>Crucially, we can also ask <code>UIFont</code> to use our own <code>contentSize</code> instead of the system’s when calling its <code>preferredFont()</code></li>
+</ol>
+
+<p>With those two key components, we can implement our own Dynamic Type but with our own writable <code>preferredContentSizeCategory</code>.</p>
+
+<h4 id="so-what-does-that-actually-look-like">So what does that actually look like?</h4>
+
+<p>Before explaining what the changes to <code>FontMetrics</code> are, here is the updated class:</p>
+
+<script src="https://gist.github.com/keehun/705975b7590fd2c933f6e4afc5baea49.js"></script>
+
+<p>Here is how I arrived at this new code:</p>
+
+<p>First, <code>FontMetrics</code> needs to use its own source of <code>UIContentSizeCategory</code> and not the system’s <code>preferredContentSizeCategory</code>. This is reflected in lines 41–45. Notice that assigning a new value posts a notification for all observers of FontMetric’s <code>ContentSizeCategoryDidChange</code>.</p>
+
+<p>Secondly, this is not demonstrated in this article, but I changed over any references in my app’s code of the system-provided <code>UIContentSizeCategoryDidChange</code> notification to our own: <code>FontMetricsContentSizeCategoryDidChange</code></p>
+
+<p>Third, in case that the user changes his or her Dynamic Type setting on their device while the app is running, <code>FontMetrics</code> observes for those changes and then changes its own <code>sizeCategory</code> to match the new system setting for a seamless experience (which then posts a notification). <em>We never want the user to notice that anything is different than how they expect system settings to work</em>.</p>
+
+<p>Fourth, now that <code>sizeCategory</code> behaves exactly as we would like, we request <code>UIFontMetrics.default.scaledFont()</code> to use our <code>ContentSizeCategory</code> instead of the system’s own. This can be seen in lines 59, 69, 87, and 100.</p>
+
+<p>Fifth, although this wasn’t strictly necessary, I created a static constant called <code>default</code> so that calling <code>FontMetrics.default</code> would always return the same instance. This is akin to <code>NotificationCenter.default</code> or <code>UIDevice.current</code>. It just helps make users of <code>FontMetrics</code> keep their code clean-looking and bug-free (by avoiding accidentally using a different instance of <code>FontMetrics</code>. This also meant that any references to <code>FontMetrics()</code> in my app was replaced with <code>FontMetrics.default</code>.</p>
+
+<hr />
+
+<p><strong><em>Basically, we’ve recreated the mechanism behind <code>UIContentSizeCategoryDidChange</code> and made our own writable version of <code>preferredContentSizeCategory</code>.</em></strong></p>
+
+<hr />
+
+<p>To take advantage of our new <code>FontMetrics</code> wrapper, we must update <code>Hal9000</code> as well!</p>
+
+<script src="https://gist.github.com/keehun/49296813bd0216d4d8b3921c729fab74.js"></script>
+
+<figure>Notice that we aren’t using <code>adjustsFontForContentSizeCategory = true</code> anymore, but now it’s unit testable!</figure>
+
+<hr />
+
+<h3 id="trade-offs">Trade Offs</h3>
+
+<p>There is an important trade off that was made here: we can’t keep using the convenient property called <code>adjustsFontForContentSizeCategory = true</code> as there is no way to ask it to observe our own <code>sizeCategory</code>. Plus, we want to have more control over our text than <code>adjustsFontForContentSizeCategory</code> offers. At Livefront, we’ve rolled our own <code>UILabel</code> replacement that is even more convenient to use than setting <code>adjustsFontForContentSizeCategory</code> to <code>true</code>. As a side-effect, we rarely have to actually observe the <code>FontMetricsContentSizeCategoryDidChange</code> notification because our custom <code>UILabel</code> (and a plethora of other controls) is already doing that for us behind the scenes.</p>
+
+<hr />
+
+<h3 id="onto-unit-tests">Onto unit tests!</h3>
+
+<p>Finally, the part we’ve been waiting for. Let’s test <code>Hal9000</code>’s Dynamic Type features!</p>
+
+<script src="https://gist.github.com/keehun/054a6968890dd18dc67ff20ce383c41b.js"></script>
+
+<p>Note that while we’re measuring the same <code>subject.dialog.font.pointSize</code> three times, we’ll get a different result as we’re changing <code>FontMetric.default.sizeCategory</code> before each measurement!</p>
+
+<p>With this power, there are many things we can choose to do with it. Here are just some ideas:</p>
+
+<ul>
+<li>Unit test Auto Layout with many different font sizes, especially complex layouts involving UIStackViews that changes axis according to its contents</li>
+<li>Write (and be able to test!) custom controls and views that implement Dynamic Type features</li>
+<li>Design unit-testable interfaces which reduce white spaces at higher levels of Dynamic Type size (e.g. a form with vertical white space between fields that get closer together as the text gets bigger instead of the fields getting further apart)</li>
+<li>Sleep better at night knowing that any regression of Dynamic Type features will be caught! 🎉</li>
+</ul>
+
+
+<figure>
+	<img src="/practical-dynamic-type-part-2-testing/unit-tests.png" alt="`Hal9000` is passing!" />
+	<figcaption><code>Hal9000</code> is passing!</figcaption>
+</figure>
+
+<h3 id="so-what-s-next">So… What’s next?</h3>
+
+<p>At Livefront, we’ve rolled unit-testable Dynamic Type and many other features into our own versions of <code>UILabel</code>, <code>UIButton</code>, and others. It has made building new interfaces so much faster and much more reliable, and we encourage you to have your own personalized toolbox that is right for you.</p>
+
+<p><a href="https://www.dropbox.com/s/9ci2r3bbvca4jhp/PracticalDynamicTypePart2.zip?dl=0">Here</a>, you can download the Xcode project and run the tests yourself!</p>
+
+<h3 id="more-resources">More Resources</h3>
+
+<ul>
+<li><a href="https://developer.apple.com/videos/play/wwdc2018/230/">&ldquo;Delivering an Exceptional Accessibility Experience&rdquo;</a> (WWDC 2018)</li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2018/235/">&ldquo;UIKit: Apps for Every Size and Shape&rdquo;</a> (WWDC 2018)</li>
+</ul>
+
+<p>Thanks to Sean Berry, Collin Flynn, and Mike Bollinger for their editorial feedback!</p>
+                        </div>
+                    </section>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+  <div class="has-text-centered">
+
+  </div>
+</footer>
+
+</body>
+</html>
