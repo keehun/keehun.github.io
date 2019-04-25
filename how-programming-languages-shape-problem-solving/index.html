@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/css/bulma.css" media="screen">
   <link rel="stylesheet" href="/webfonts/lora/lora.css" type="text/css" charset="utf-8" />
   <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Keehun Nam">
-  <title>How Programming Languages Shape Problem Solving - Keehun Nam</title>
+  <title>How (Programming) Languages Shape Problem Solving - Keehun Nam</title>
 </head>
 
 <body><header class="section">
@@ -17,12 +17,12 @@
     <div class="level">
       <div class="level-left">
         <div class="level-item">
-          <img class="image is-rounded is-32x32" src="/img/keehun.png">
+          <img class="image is-rounded is-32x32" src="/img/keehun_4.png">
         </div>
         <div class="level-item">
           <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
             <ul>
-              <li><a href="/">Keehun Nam</a></li><li class="is-active"><a href="https://www.keehun.dev/how-programming-languages-shape-problem-solving/" aria-current="page">How Programming Languages Shape Problem Solving</a></li>
+              <li><a href="/">Keehun Nam</a></li><li class="is-active"><a href="https://www.keehun.dev/how-programming-languages-shape-problem-solving/" aria-current="page">How (Programming) Languages Shape Problem Solving</a></li>
             </ul>
           </nav>
         </div>
@@ -38,7 +38,7 @@
         <div class="columns is-centered is-mobile">
             <div class="column is-full">
                 <article itemscope itemtype="http://schema.org/BlogPosting">
-                    <h1 class="title has-text-centered" itemprop="headline">How Programming Languages Shape Problem Solving</h1>
+                    <h1 class="title has-text-centered" itemprop="headline">How (Programming) Languages Shape Problem Solving</h1>
                     
                     <h2 class="subtitle is-5 has-text-centered"><time itemprop="datePublished" datetime="2019-04-25">April 25, 2019</time></h2>
                     
@@ -63,21 +63,19 @@
                 <article itemscope itemtype="http://schema.org/BlogPosting">
                     <section class="body is-size-5" itemprop="articleBody">
                         <div class="content">
-                            
+                            <p>It is increasingly important to be a multilingual developer. Being a developer who is fluent in many programming languages not only helps your marketability, but it will also improve your problem-solving skills. It will help you become a more powerful developer who can tackle a problem with deeper insight, better-informed architectural decisions, and think beyond the inherent limitations of any single language. In the past six months,</p>
 
-<h1 id="how-programming-languages-shape-problem-solving">How (Programming) Languages Shape Problem-Solving</h1>
-
-<p>It is increasingly important to be a multilingual developer. Being a developer who is fluent in many programming languages not only helps your marketability, but it will also improve your problem-solving skills. It will help you become a more powerful developer who can tackle a problem with deeper insight, better-informed architectural decisions, and think beyond the inherent limitations of any single language. In the past six months, I learned languages that I previously only used casually (like Ruby, Python, and JavaScript) in pursuit of staying at the leading edge of the evolving technological landscape. During this period, I have come to realize that my thinking and problem-solving in software engineering had been limited to what is idiomatic in Swift and Objective-C. Becoming a multilingual developer has improved my problem-solving skills.</p>
+<p>I learned languages that I previously only used casually (like Ruby, Python, and JavaScript) in pursuit of staying at the leading edge of the evolving technological landscape. During this period, I have come to realize that my thinking and problem-solving in software engineering had been limited to what is idiomatic in Swift and Objective-C. Becoming a multilingual developer has improved my problem-solving skills.</p>
 
 <p>A language and its design have profound consequences on its users. As a bilingual person, I have the benefit of being able to think through a problem in both my mother tongue as well as in English where I can take advantage of small differences between those languages. (For example, one language may have a very specific word for a concept while the other differs in grammatical structure that allows me to see the problem from a different angle.) Perhaps the best example of the impact of the design of a language comes from research on <a href="https://en.wikipedia.org/wiki/Magnetoreception">Magnetoreception</a> (the perception of the geomagnetic field) which discusses languages throughout the world that lack words for egocentric directions (front, back, left, and right) and instead solely rely on cardinal directions (north, south, west, east).<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>The users of those languages have become extraordinarily aware of their sense of direction. Perhaps imagine if you had never learned the word for blue—how would that affect your perception of the world? There is even evidence that a higher percentage of tonal language speakers (such as Mandarin and Vietnamese) have absolute pitch — the ability to label the musical pitch of an arbitrary sound — than those who are not speakers of tonal languages.<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup> The design of a language has immense power to affect its speakers and their way of perceiving the world.</p>
 
-<p>An influential linguist Edward Sapir once wrote that “The worlds in which different societies live are distinct worlds, not merely the same worlds with different labels attached.”<sup class="footnote-ref" id="fnref:3"><a href="#fn:3">3</a></sup> I believe this also apply to us as software engineers with programming languages: it is important for us as developers to invest the time and effort into learning unfamiliar programming languages.</p>
+<p>An influential linguist Edward Sapir once wrote that &ldquo;The worlds in which different societies live are distinct worlds, not merely the same worlds with different labels attached.&rdquo;<sup class="footnote-ref" id="fnref:3"><a href="#fn:3">3</a></sup> I believe this also apply to us as software engineers with programming languages: it is important for us as developers to invest the time and effort into learning unfamiliar programming languages.</p>
 
 <p>For example, let’s say that you’re a junior iOS developer and have only ever read or written Swift, and never Objective-C. There are programming paradigms that you’re missing out on.<sup class="footnote-ref" id="fnref:4"><a href="#fn:4">4</a></sup></p>
 
 <h2 id="objective-c-and-swift">Objective-C and Swift</h2>
 
-<p>One of the key differences between Objective-C and Swift is how functions are called. Objective-C implements its functionality by *passing runtime messages*between objects whereas Swift function calls must be known at compile-time. This has a few serious implications: it’s possible to compile and execute an Objective-C program where the object sending a message (i.e. a function call) doesn’t know anything about the recipient of that message. The opposite is also true: the object receiving a message may not know what to do with that message (i.e. missing function declaration). This means that in Objective-C, you don’t have to know what function call (i.e. <em>message</em>) your code is going to make when you compile your app. This messaging system (which can allow for a lot of abuse) enabled and continues to enable an incredible number of iOS and macOS applications and libraries that would not have been practical or even possible in Swift. (This is how Dropbox placed those green checkmarks in Finder before the official API became available in <a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Finder.html">OS X 10.10 “Yosemite”</a>).</p>
+<p>One of the key differences between Objective-C and Swift is how functions are called. Objective-C implements its functionality by <em>passing runtime messages</em> between objects whereas Swift function calls must be known at compile-time. This has a few serious implications: it’s possible to compile and execute an Objective-C program where the object sending a message (i.e. a function call) doesn’t know anything about the recipient of that message. The opposite is also true: the object receiving a message may not know what to do with that message (i.e. missing function declaration). This means that in Objective-C, you don’t have to know what function call (i.e. <em>message</em>) your code is going to make when you compile your app. This messaging system (which can allow for a lot of abuse) enabled and continues to enable an incredible number of iOS and macOS applications and libraries that would not have been practical or even possible in Swift. (This is how Dropbox placed those green checkmarks in Finder before the official API became available in <a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Finder.html">OS X 10.10 &ldquo;Yosemite&rdquo;</a>).</p>
 
 <p>Here is another example of what you’re missing out on if you’ve only ever written or read Swift:</p>
 
@@ -107,13 +105,15 @@
 
 <h2 id="finally"><code>.Finally()</code></h2>
 
-<p>If you’re saying to yourself “*but I already knew about async &amp; await!*”, that’s awesome! And, you’re right: <code>async</code>/<code>await</code>is not a new idea. It has existed in C# since Visual Studio 11 and as far back as <a href="https://blogs.msdn.microsoft.com/dsyme/2007/10/10/introducing-f-asynchronous-workflows/">2007 in F#</a>, but that’s the point! I’ve learned many things exploring Ruby, Python, and JavaScript among other languages these past six months. I can confidently say that there is some pattern, architecture, or even a language-level feature that you probably aren’t aware of, and I hope that you will continue to explore other languages and features that will make you a better developer.</p>
+<p>If you’re saying to yourself &ldquo;<em>but I already knew about async &amp; await!</em>&rdquo;, that’s awesome! And, you’re right: <code>async</code>/<code>await</code>is not a new idea. It has existed in C# since Visual Studio 11 and as far back as <a href="https://blogs.msdn.microsoft.com/dsyme/2007/10/10/introducing-f-asynchronous-workflows/">2007 in F#</a>, but that’s the point! I’ve learned many things exploring Ruby, Python, and JavaScript among other languages these past six months. I can confidently say that there is some pattern, architecture, or even a language-level feature that you probably aren’t aware of, and I hope that you will continue to explore other languages and features that will make you a better developer.</p>
 
 <p><em>Keehun loves to</em> <code>find.out().then(obliterate(his.ignorance))</code><em>at Livefront.</em></p>
 
 <hr />
 
 <h3 id="footnotes">Footnotes</h3>
+
+<p><em>Thanks to <a href="https://medium.com/@livefront?source=post_page">Mike Bollinger</a>, <a href="https://medium.com/@peteorpeter?source=post_page">Pete Jones</a>, <a href="https://medium.com/@brianyencho?source=post_page">Brian Yencho</a>, <a href="https://medium.com/@regularberry?source=post_page">Sean Berry</a>, and <a href="https://medium.com/@collinflynn?source=post_page">Collin Flynn</a> for their editorial support.</em></p>
 <div class="footnotes">
 
 <hr />
@@ -129,7 +129,6 @@
  <a class="footnote-return" href="#fnref:4"><sup>[return]</sup></a></li>
 </ol>
 </div>
-
                         </div>
                     </section>
                 </article>
