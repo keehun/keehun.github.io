@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.keehun.dev/scss/style.min.3cf659a3db2801d1078cfa075027fb3f41972950377529ef910ccfdb1adffb49.css" integrity="sha256-PPZZo9soAdEHjPoHUCf7P0GXKVA3dSnvkQzP2xrf+0k=" media="screen">
+  <link rel="stylesheet" href="/css/bulma.css" media="screen">
+  <link rel="stylesheet" href="/webfonts/lora/lora.css" type="text/css" charset="utf-8" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Keehun Nam">
+  <title>How Programming Languages Shape Problem Solving - Keehun Nam</title>
+</head>
+
+<body><header class="section">
+  <div class="container">
+    <br/>
+    <div class="level">
+      <div class="level-left">
+        <div class="level-item">
+          <img class="image is-rounded is-32x32" src="/img/keehun.png">
+        </div>
+        <div class="level-item">
+          <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
+            <ul>
+              <li><a href="/">Keehun Nam</a></li><li class="is-active"><a href="https://www.keehun.dev/how-programming-languages-shape-problem-solving/" aria-current="page">How Programming Languages Shape Problem Solving</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+
+<section class="section">
+    <div class="container is-fluid">
+        <div class="columns is-centered is-mobile">
+            <div class="column is-full">
+                <article itemscope itemtype="http://schema.org/BlogPosting">
+                    <h1 class="title has-text-centered" itemprop="headline">How Programming Languages Shape Problem Solving</h1>
+                    
+                    <h2 class="subtitle is-5 has-text-centered"><time itemprop="datePublished" datetime="2019-04-25">April 25, 2019</time></h2>
+                    
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hero is-medium">
+    <div class="hero-body">
+        <div class="container">
+            <img class="is-aspect-fill" src="https://www.keehun.dev/how-programming-languages-shape-problem-solving//banner.png" />
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-fluid">
+        <div class="columns is-centered is-mobile">
+            <div class="column is-full">
+                <article itemscope itemtype="http://schema.org/BlogPosting">
+                    <section class="body is-size-5" itemprop="articleBody">
+                        <div class="content">
+                            
+
+<h1 id="how-programming-languages-shape-problem-solving">How (Programming) Languages Shape Problem-Solving</h1>
+
+<p>It is increasingly important to be a multilingual developer. Being a developer who is fluent in many programming languages not only helps your marketability, but it will also improve your problem-solving skills. It will help you become a more powerful developer who can tackle a problem with deeper insight, better-informed architectural decisions, and think beyond the inherent limitations of any single language. In the past six months, I learned languages that I previously only used casually (like Ruby, Python, and JavaScript) in pursuit of staying at the leading edge of the evolving technological landscape. During this period, I have come to realize that my thinking and problem-solving in software engineering had been limited to what is idiomatic in Swift and Objective-C. Becoming a multilingual developer has improved my problem-solving skills.</p>
+
+<p>A language and its design have profound consequences on its users. As a bilingual person, I have the benefit of being able to think through a problem in both my mother tongue as well as in English where I can take advantage of small differences between those languages. (For example, one language may have a very specific word for a concept while the other differs in grammatical structure that allows me to see the problem from a different angle.) Perhaps the best example of the impact of the design of a language comes from research on <a href="https://en.wikipedia.org/wiki/Magnetoreception">Magnetoreception</a> (the perception of the geomagnetic field) which discusses languages throughout the world that lack words for egocentric directions (front, back, left, and right) and instead solely rely on cardinal directions (north, south, west, east).<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>The users of those languages have become extraordinarily aware of their sense of direction. Perhaps imagine if you had never learned the word for blue—how would that affect your perception of the world? There is even evidence that a higher percentage of tonal language speakers (such as Mandarin and Vietnamese) have absolute pitch — the ability to label the musical pitch of an arbitrary sound — than those who are not speakers of tonal languages.<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup> The design of a language has immense power to affect its speakers and their way of perceiving the world.</p>
+
+<p>An influential linguist Edward Sapir once wrote that “The worlds in which different societies live are distinct worlds, not merely the same worlds with different labels attached.”<sup class="footnote-ref" id="fnref:3"><a href="#fn:3">3</a></sup> I believe this also apply to us as software engineers with programming languages: it is important for us as developers to invest the time and effort into learning unfamiliar programming languages.</p>
+
+<p>For example, let’s say that you’re a junior iOS developer and have only ever read or written Swift, and never Objective-C. There are programming paradigms that you’re missing out on.<sup class="footnote-ref" id="fnref:4"><a href="#fn:4">4</a></sup></p>
+
+<h2 id="objective-c-and-swift">Objective-C and Swift</h2>
+
+<p>One of the key differences between Objective-C and Swift is how functions are called. Objective-C implements its functionality by *passing runtime messages*between objects whereas Swift function calls must be known at compile-time. This has a few serious implications: it’s possible to compile and execute an Objective-C program where the object sending a message (i.e. a function call) doesn’t know anything about the recipient of that message. The opposite is also true: the object receiving a message may not know what to do with that message (i.e. missing function declaration). This means that in Objective-C, you don’t have to know what function call (i.e. <em>message</em>) your code is going to make when you compile your app. This messaging system (which can allow for a lot of abuse) enabled and continues to enable an incredible number of iOS and macOS applications and libraries that would not have been practical or even possible in Swift. (This is how Dropbox placed those green checkmarks in Finder before the official API became available in <a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Finder.html">OS X 10.10 “Yosemite”</a>).</p>
+
+<p>Here is another example of what you’re missing out on if you’ve only ever written or read Swift:</p>
+
+<h2 id="async-await"><code>Async</code>/<code>Await</code></h2>
+
+<p>Until recently, I had never used the <code>async</code>/<code>await</code>pattern. While I am intimately familiar with concurrency and the immense power of <a href="https://en.wikipedia.org/wiki/Grand_Central_Dispatch">Grand Central Dispatch</a>, I completely missed out on <code>async</code>/<code>await</code>.</p>
+
+<p>One of the best things about working at Livefront is its emphasis on leadership in the software field and its future. On my most recent R&amp;D project, I’ve had an opportunity to learn and use JavaScript (ES6) on the Node.js platform to puzzle together asynchronous network requests within a strict structure that I could not redefine (i.e. an SDK). This is usually not a challenge that I face in working with Swift and Objective-C given that I get to architect the asynchronous work in such a way that is both idiomatic and makes conceptual sense in my mind. However, working within a strict confines of an SDK on a server architecture I had never used before (AWS Lambda) in a foreign language proved a challenge that necessitated me to put my head down and learn a totally new concept: <code>async</code>/<code>await</code>.</p>
+
+<p>After exploring JavaScript’s built-in support for <code>async</code>/<code>await</code>(and Promises!), I realized that I had done something similar many times in the past in Swift using Grand Central Dispatch&rsquo;s <code>DispatchGroup</code>. However, the key difference was that Swift does not have language-level support for the <code>await</code>in <code>async</code>/<code>await</code>. (<code>await</code>prevents the execution of the code from continuing past the <code>await</code>keyword until the <code>async</code>has been resolved.) This has the power to enable a meaningful order of asynchronous operations as well as avoiding potential callback hell that can arise even in the best of Swift codebases.</p>
+
+<p>Let’s look at an example:</p>
+
+<script src="https://gist.github.com/keehun/df56304f2c2dca2cac37e86619405e55.js"></script>
+
+<p>Here is one (quite suboptimal) way in Swift to execute a similar operation only using <code>Foundation</code>:</p>
+
+<script src="https://gist.github.com/keehun/f20b113193280c527f0fcd4358f849ae.js"></script>
+
+<p>Clearly, this is why libraries like <a href="https://github.com/mxcl/PromiseKit">PromiseKit</a> exist. (At Livefront, we’ve written a thin wrapper around <code>URLSession</code>that allows Promise-like chaining of tasks and error catching for network operations.) However, neither of these solutions enable the synchronous design that <code>await</code>provides should it be needed.</p>
+
+<blockquote>
+<p>“The worlds in which different societies live are distinct worlds, not merely the same worlds with different labels attached.” - Edward Sapir</p>
+</blockquote>
+
+<p>Had I not ventured outside of my usual routine of dependency-free Swift to explore ES6 JavaScript, not only would I have missed out on this particular programming paradigm, but I would have also missed out on the mental/conceptual model of <code>async</code>/<code>await</code>. Now that I’m familiar with this kind of control flow of combining asynchronous and synchronous code together, I have yet another tool in my toolbox that I can use at a moment’s notice in problem-solving. And, even though I can’t natively use <code>await</code>directly in Swift, I can borrow concepts from <code>async</code>/<code>await</code>to implement new idiomatic solutions.</p>
+
+<h2 id="finally"><code>.Finally()</code></h2>
+
+<p>If you’re saying to yourself “*but I already knew about async &amp; await!*”, that’s awesome! And, you’re right: <code>async</code>/<code>await</code>is not a new idea. It has existed in C# since Visual Studio 11 and as far back as <a href="https://blogs.msdn.microsoft.com/dsyme/2007/10/10/introducing-f-asynchronous-workflows/">2007 in F#</a>, but that’s the point! I’ve learned many things exploring Ruby, Python, and JavaScript among other languages these past six months. I can confidently say that there is some pattern, architecture, or even a language-level feature that you probably aren’t aware of, and I hope that you will continue to explore other languages and features that will make you a better developer.</p>
+
+<p><em>Keehun loves to</em> <code>find.out().then(obliterate(his.ignorance))</code><em>at Livefront.</em></p>
+
+<hr />
+
+<h3 id="footnotes">Footnotes</h3>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1"><a href="http://www.eneuro.org/content/early/2019/03/18/ENEURO.0483-18.2019">http://www.eneuro.org/content/early/2019/03/18/ENEURO.0483-18.2019</a>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2"><a href="https://www.sciencedaily.com/releases/2012/10/121023124000.htm">https://www.sciencedaily.com/releases/2012/10/121023124000.htm</a>
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+<li id="fn:3"><a href="https://www.psychologytoday.com/us/blog/the-biolinguistic-turn/201702/how-the-language-we-speak-affects-the-way-we-think">https://www.psychologytoday.com/us/blog/the-biolinguistic-turn/201702/how-the-language-we-speak-affects-the-way-we-think</a>
+ <a class="footnote-return" href="#fnref:3"><sup>[return]</sup></a></li>
+<li id="fn:4">If you are reading this, and you are a person who has only experimented with a single language (Swift or any other), I highly recommend you go check out other languages such as <a href="https://www.codecademy.com/learn/learn-c-plus-plus">C++</a>, <a href="https://www.rust-lang.org/">Rust</a>, <a href="https://golang.org/">Go</a>, <a href="https://www.codecademy.com/learn/learn-java/">Java</a>, <a href="https://cran.r-project.org/doc/manuals/r-release/R-intro.html">R</a>, <a href="https://www.codecademy.com/learn/learn-c-sharp">C#</a>, and <a href="https://kotlinlang.org/docs/tutorials/">Kotlin</a>.
+ <a class="footnote-return" href="#fnref:4"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+                        </div>
+                    </section>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+  <div class="has-text-centered">
+
+  </div>
+</footer>
+
+</body>
+</html>

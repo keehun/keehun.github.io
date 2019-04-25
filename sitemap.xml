@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://www.keehun.dev/how-programming-languages-shape-problem-solving/</loc>
+    <lastmod>2019-04-25T08:08:55-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.keehun.dev/practical-dynamic-type-part-3-attributed-strings/</loc>
     <lastmod>2019-02-15T20:00:00-06:00</lastmod>
   </url>
@@ -94,7 +99,7 @@
   
   <url>
     <loc>https://www.keehun.dev/</loc>
-    <lastmod>2019-02-15T20:00:00-06:00</lastmod>
+    <lastmod>2019-04-25T08:08:55-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -112,7 +117,7 @@
   
   <url>
     <loc>https://www.keehun.dev/posts/</loc>
-    <lastmod>2019-02-15T20:00:00-06:00</lastmod>
+    <lastmod>2019-04-25T08:08:55-05:00</lastmod>
     <priority>0</priority>
   </url>
   
