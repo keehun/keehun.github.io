@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Keehun Nam</title>
@@ -35,7 +35,7 @@
       <pubDate>Wed, 30 Jan 2019 19:29:33 -0600</pubDate>
       
       <guid>https://www.keehun.dev/understanding-swifts-characterset/</guid>
-      <description>&lt;p&gt;Have you ever needed to check if a string was made up only of digits? How about the presence of punctuation or non-alphanumeric characters? One could use a variety of methods from one of the &lt;code&gt;Formatter&lt;/code&gt; classes to &lt;code&gt;NSScanner&lt;/code&gt; to even &lt;code&gt;NSPredicate&lt;/code&gt;, but the &lt;a href=&#34;https://stackoverflow.com/questions/34354740/how-do-you-confirm-a-string-only-contains-numbers-in-swift/34354943&#34;&gt;most&lt;/a&gt; &lt;a href=&#34;https://stackoverflow.com/questions/34587094/how-to-check-if-text-contains-only-numbers/34587234&#34;&gt;likely&lt;/a&gt; &lt;a href=&#34;https://www.reddit.com/r/swift/comments/40jj5r/is_there_a_way_to_find_whether_or_not_a_character/cyun9yn/&#34;&gt;snippet&lt;/a&gt; you would&amp;rsquo;ve found involved the use of an inverted &lt;code&gt;CharacterSet&lt;/code&gt;.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Have you ever needed to check if a string was made up only of digits? How about the presence of punctuation or non-alphanumeric characters? One could use a variety of methods from one of the &lt;code&gt;Formatter&lt;/code&gt; classes to &lt;code&gt;NSScanner&lt;/code&gt; to even &lt;code&gt;NSPredicate&lt;/code&gt;, but the &lt;a href=&#34;https://stackoverflow.com/questions/34354740/how-do-you-confirm-a-string-only-contains-numbers-in-swift/34354943&#34;&gt;most&lt;/a&gt; &lt;a href=&#34;https://stackoverflow.com/questions/34587094/how-to-check-if-text-contains-only-numbers/34587234&#34;&gt;likely&lt;/a&gt; &lt;a href=&#34;https://www.reddit.com/r/swift/comments/40jj5r/is_there_a_way_to_find_whether_or_not_a_character/cyun9yn/&#34;&gt;snippet&lt;/a&gt; you would&#39;ve found involved the use of an inverted &lt;code&gt;CharacterSet&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -44,7 +44,7 @@
       <pubDate>Mon, 28 Jan 2019 19:38:56 -0600</pubDate>
       
       <guid>https://www.keehun.dev/contact/</guid>
-      <description>From      Subject      Message        Send message       </description>
+      <description></description>
     </item>
     
     <item>
@@ -53,8 +53,8 @@
       <pubDate>Sun, 20 Jan 2019 19:26:16 -0600</pubDate>
       
       <guid>https://www.keehun.dev/about/</guid>
-      <description>I am currently a Software Developer at Livefront where I help develop some of the most remarkable experiences and applications available on the iOS platform.
-I am also the Artistic Director (designate) of the Southeast Minnesota Youth Orchestras in Rochester, MN. In addition, I am working with some of my best friends on creating refreshing, authentic concerts of contemporary music connecting audiences with composers at un/pitched.
+      <description>I am currently an Engineer at Crowdstrike where I help stop breaches for the world&#39;s biggest corporations, non-profits, and governments.
+I am also the Artistic Director of the Southeast Minnesota Youth Orchestras in Rochester, MN. In addition, I am working with some of my best friends on creating refreshing, authentic concerts of contemporary music connecting audiences with composers at un/pitched.
 I am committed to helping devoted individuals get better at both classical music and programming.</description>
     </item>
     
@@ -64,7 +64,7 @@ I am committed to helping devoted individuals get better at both classical music
       <pubDate>Mon, 27 Aug 2018 20:00:00 -0600</pubDate>
       
       <guid>https://www.keehun.dev/practical-dynamic-type-part-2-testing/</guid>
-      <description>&lt;p&gt;Last year, &lt;a href=&#34;https://livefront.com&#34;&gt;Livefront&lt;/a&gt;&amp;rsquo;s software developer &lt;a href=&#34;https://medium.com/@chris_91497&#34;&gt;Chris Sessions&lt;/a&gt; wrote a &lt;a href=&#34;https://medium.com/livefront/practical-dynamic-type-d2b5774e8a8a&#34;&gt;helpful article&lt;/a&gt; about practical usage of Dynamic Type. This short follow-up addresses one primary concern: &lt;em&gt;Unit Testing&lt;/em&gt;.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Last year, &lt;a href=&#34;https://livefront.com&#34;&gt;Livefront&lt;/a&gt;&amp;lsquo;s software developer &lt;a href=&#34;https://medium.com/@chris_91497&#34;&gt;Chris Sessions&lt;/a&gt; wrote a &lt;a href=&#34;https://medium.com/livefront/practical-dynamic-type-d2b5774e8a8a&#34;&gt;helpful article&lt;/a&gt; about practical usage of Dynamic Type. This short follow-up addresses one primary concern: &lt;em&gt;Unit Testing&lt;/em&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -91,7 +91,7 @@ I am committed to helping devoted individuals get better at both classical music
       <pubDate>Sun, 22 Jan 2017 12:00:00 -0600</pubDate>
       
       <guid>https://www.keehun.dev/musical/program-notes-for-february-5-2017/</guid>
-      <description>Program notes written for Ithaca College Symphony Orchestra&amp;rsquo;s concert on February 5, 2017.
+      <description>Program notes written for Ithaca College Symphony Orchestra&#39;s concert on February 5, 2017.
 Piano Concerto in A minor, op. 16 (Grieg) Grieg was only 24 years-old when he composed this concerto—the only concerto he completed in his life. It was premiered in Copenhagen on April 3, 1869, and a months later, it was premiered in his own country in Oslo, Norway. Like many composers before him, Grieg never quite finished the work, revising it throughout his career until he died.</description>
     </item>
     
@@ -110,7 +110,7 @@ Piano Concerto in A minor, op. 16 (Grieg) Grieg was only 24 years-old when he co
       <pubDate>Thu, 17 Nov 2016 12:00:00 -0600</pubDate>
       
       <guid>https://www.keehun.dev/musical/program-notes-for-november-17-2016/</guid>
-      <description>Program notes written for Ithaca College Sinfonietta&amp;rsquo;s concert on February 5, 2017.
+      <description>Program notes written for Ithaca College Sinfonietta&#39;s concert on February 5, 2017.
 Polovtsian Dances Alexander Borodin is one of the most interesting composers. He was not only a widely respected organic chemist in his day (he is co-credited with the discovery of the Aldol reaction) but he also composed one of the most famous Russian operas (Prince Igor), adopted children, and was an activist for women’s rights (especially in equal education).</description>
     </item>
     
@@ -120,7 +120,7 @@ Polovtsian Dances Alexander Borodin is one of the most interesting composers. He
       <pubDate>Sat, 19 Mar 2016 16:12:00 -0600</pubDate>
       
       <guid>https://www.keehun.dev/musical/program-notes-for-april-2-2016/</guid>
-      <description>Program notes written for Vanderbilt Commodore Orchestra&amp;rsquo;s concert on April 2, 2016.
+      <description>Program notes written for Vanderbilt Commodore Orchestra&#39;s concert on April 2, 2016.
 Semiramide (1823) While it’s accepted that many old tales have become inconsistent over the years, Semiramis is in her own class when it comes to the sheer number and diversity of variations. The version Rossini chose to write about in his last Italian opera comes from Voltaire’s tragedy Semiramis.
 There are threads of consistency among the plethora of different versions.</description>
     </item>
@@ -131,7 +131,7 @@ There are threads of consistency among the plethora of different versions.</desc
       <pubDate>Tue, 19 Jan 2016 16:57:32 -0600</pubDate>
       
       <guid>https://www.keehun.dev/musical/program-notes-for-january-30-2016/</guid>
-      <description>Program notes written for Vanderbilt Commodore Orchestra&amp;rsquo;s concert on January 30, 2016.
+      <description>Program notes written for Vanderbilt Commodore Orchestra&#39;s concert on January 30, 2016.
 Polovtsian Dances Alexander Borodin is one of the most interesting composers. He was not only a widely respected organic chemist in his day (he is co-credited with the discovery of the Aldol reaction) but he also composed one of the most famous Russian operas (Prince Igor), adopted children, and was an activist for women’s rights (especially in equal education).</description>
     </item>
     
@@ -141,8 +141,9 @@ Polovtsian Dances Alexander Borodin is one of the most interesting composers. He
       <pubDate>Sun, 22 Feb 2015 16:00:00 -0600</pubDate>
       
       <guid>https://www.keehun.dev/musical/program-notes-for-february-22-2015/</guid>
-      <description>Program notes written for Vanderbilt Commodore Orchestra&amp;rsquo;s concert on February 22, 2015.
-Debussy: Prelude to the Afternoon of a Faun Prelude to the Afternoon of a Faun is one of Debussy’s most revolutionary pieces. Pierre Boulez said of the piece that it “brought new breath to the art of music.” Debussy said of his own work that: The music of this prelude is a very free illustration of Mallarmé&amp;rsquo;s beautiful poem.</description>
+      <description>Program notes written for Vanderbilt Commodore Orchestra&#39;s concert on February 22, 2015.
+Debussy: Prelude to the Afternoon of a Faun Prelude to the Afternoon of a Faun is one of Debussy’s most revolutionary pieces. Pierre Boulez said of the piece that it “brought new breath to the art of music.” Debussy said of his own work that:
+Although Mallarmé was against Debussy’s setting of his poem on principle (words were perfect on their own), he wrote the following to Debussy after hearing it at a concert:</description>
     </item>
     
     <item>
@@ -160,7 +161,7 @@ Debussy: Prelude to the Afternoon of a Faun Prelude to the Afternoon of a Faun i
       <pubDate>Thu, 15 May 2014 11:00:00 -0600</pubDate>
       
       <guid>https://www.keehun.dev/musical/the-relevance-of-philosophy-for-a-musician/</guid>
-      <description>This essay is the written corroboration of the self-transformative process regarding my views on abstract branches of Philosophy such as metaphysics and ontology. So far, I have ignorantly dismissed them as irrelevant. However, taking this course on Continental Philosophy has taught me that it is not as irrelevant as it initially seems. This essay, in its current form, reflects the status of my thought at the time of my writing.</description>
+      <description>This essay is the written corroboration of the self-transformative process regarding my views on abstract branches of Philosophy such as metaphysics and ontology. So far, I have ignorantly dismissed them as irrelevant. However, taking this course on Continental Philosophy has taught me that it is not as irrelevant as it initially seems. This essay, in its current form, reflects the status of my thought at the time of my writing. The essay acted as the whiteboard of my constantly evolving ideas about various issues in music, art, and aesthetics, and what you see are only the surviving remnants.</description>
     </item>
     
     <item>
@@ -170,7 +171,7 @@ Debussy: Prelude to the Afternoon of a Faun Prelude to the Afternoon of a Faun i
       
       <guid>https://www.keehun.dev/musical/spring-2014-concerts/</guid>
       <description>I am conducting an entire concert of my own this February and have another in April with Grammy-nominated violinist Peter Shepperd Skærved!
-The Commodore: An Introduction to Cornelius Vanderbilt February 22, 2014 at 03:00pm in Ingram Hall
+ The Commodore: An Introduction to Cornelius Vanderbilt February 22, 2014 at 03:00pm in Ingram Hall
  The brand-new Vanderbilt Commodore Orchestra celebrates its inaugural concert by getting to know the man who not only gave the Commodores their name but was also one of the most influential men in all of American history.</description>
     </item>
     
@@ -180,7 +181,7 @@ The Commodore: An Introduction to Cornelius Vanderbilt February 22, 2014 at 03:0
       <pubDate>Thu, 19 Jan 2012 06:00:00 -0600</pubDate>
       
       <guid>https://www.keehun.dev/musical/handels-trumpet-sonata/</guid>
-      <description>With the recent passing of Supreme Court&amp;rsquo;s decision to allow re-copyrighting of Public Domain works, Congress will pass a legislation that will implement just that&amp;ndash;in order to satisfy their lobbyists&amp;rsquo; deep pockets. This is the single worst decision and piece of legislation I&amp;rsquo;ve ever came across. It is more ridiculous than SOPA or PIPA.
+      <description>With the recent passing of Supreme Court&#39;s decision to allow re-copyrighting of Public Domain works, Congress will pass a legislation that will implement just that&amp;ndash;in order to satisfy their lobbyists&amp;rsquo; deep pockets. This is the single worst decision and piece of legislation I&#39;ve ever came across. It is more ridiculous than SOPA or PIPA.
 In a form of protest, I am releasing a piece of music that should be in the Public Domain by now.</description>
     </item>
     

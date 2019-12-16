@@ -1,9 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>https://www.keehun.dev/how-programming-languages-shape-problem-solving/</loc>
+    <lastmod>2019-04-25T08:08:55-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.keehun.dev/</loc>
+    <lastmod>2019-04-25T08:08:55-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.keehun.dev/posts/</loc>
     <lastmod>2019-04-25T08:08:55-05:00</lastmod>
   </url>
   
@@ -23,6 +33,11 @@
   </url>
   
   <url>
+    <loc>https://www.keehun.dev/pages/</loc>
+    <lastmod>2019-01-28T19:38:56-06:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://www.keehun.dev/about/</loc>
     <lastmod>2019-01-20T19:26:16-06:00</lastmod>
   </url>
@@ -30,6 +45,11 @@
   <url>
     <loc>https://www.keehun.dev/practical-dynamic-type-part-2-testing/</loc>
     <lastmod>2018-08-27T20:00:00-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.keehun.dev/musical/</loc>
+    <lastmod>2017-11-04T16:25:57+00:00</lastmod>
   </url>
   
   <url>
@@ -94,36 +114,10 @@
   
   <url>
     <loc>https://www.keehun.dev/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.keehun.dev/</loc>
-    <lastmod>2019-04-25T08:08:55-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.keehun.dev/musical/</loc>
-    <lastmod>2017-11-04T16:25:57+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.keehun.dev/pages/</loc>
-    <lastmod>2019-01-28T19:38:56-06:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.keehun.dev/posts/</loc>
-    <lastmod>2019-04-25T08:08:55-05:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.keehun.dev/tags/</loc>
-    <priority>0</priority>
   </url>
   
 </urlset>

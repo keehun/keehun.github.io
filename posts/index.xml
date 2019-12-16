@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Keehun Nam</title>
@@ -35,7 +35,7 @@
       <pubDate>Wed, 30 Jan 2019 19:29:33 -0600</pubDate>
       
       <guid>https://www.keehun.dev/understanding-swifts-characterset/</guid>
-      <description>&lt;p&gt;Have you ever needed to check if a string was made up only of digits? How about the presence of punctuation or non-alphanumeric characters? One could use a variety of methods from one of the &lt;code&gt;Formatter&lt;/code&gt; classes to &lt;code&gt;NSScanner&lt;/code&gt; to even &lt;code&gt;NSPredicate&lt;/code&gt;, but the &lt;a href=&#34;https://stackoverflow.com/questions/34354740/how-do-you-confirm-a-string-only-contains-numbers-in-swift/34354943&#34;&gt;most&lt;/a&gt; &lt;a href=&#34;https://stackoverflow.com/questions/34587094/how-to-check-if-text-contains-only-numbers/34587234&#34;&gt;likely&lt;/a&gt; &lt;a href=&#34;https://www.reddit.com/r/swift/comments/40jj5r/is_there_a_way_to_find_whether_or_not_a_character/cyun9yn/&#34;&gt;snippet&lt;/a&gt; you would&amp;rsquo;ve found involved the use of an inverted &lt;code&gt;CharacterSet&lt;/code&gt;.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Have you ever needed to check if a string was made up only of digits? How about the presence of punctuation or non-alphanumeric characters? One could use a variety of methods from one of the &lt;code&gt;Formatter&lt;/code&gt; classes to &lt;code&gt;NSScanner&lt;/code&gt; to even &lt;code&gt;NSPredicate&lt;/code&gt;, but the &lt;a href=&#34;https://stackoverflow.com/questions/34354740/how-do-you-confirm-a-string-only-contains-numbers-in-swift/34354943&#34;&gt;most&lt;/a&gt; &lt;a href=&#34;https://stackoverflow.com/questions/34587094/how-to-check-if-text-contains-only-numbers/34587234&#34;&gt;likely&lt;/a&gt; &lt;a href=&#34;https://www.reddit.com/r/swift/comments/40jj5r/is_there_a_way_to_find_whether_or_not_a_character/cyun9yn/&#34;&gt;snippet&lt;/a&gt; you would&#39;ve found involved the use of an inverted &lt;code&gt;CharacterSet&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -44,7 +44,7 @@
       <pubDate>Mon, 27 Aug 2018 20:00:00 -0600</pubDate>
       
       <guid>https://www.keehun.dev/practical-dynamic-type-part-2-testing/</guid>
-      <description>&lt;p&gt;Last year, &lt;a href=&#34;https://livefront.com&#34;&gt;Livefront&lt;/a&gt;&amp;rsquo;s software developer &lt;a href=&#34;https://medium.com/@chris_91497&#34;&gt;Chris Sessions&lt;/a&gt; wrote a &lt;a href=&#34;https://medium.com/livefront/practical-dynamic-type-d2b5774e8a8a&#34;&gt;helpful article&lt;/a&gt; about practical usage of Dynamic Type. This short follow-up addresses one primary concern: &lt;em&gt;Unit Testing&lt;/em&gt;.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Last year, &lt;a href=&#34;https://livefront.com&#34;&gt;Livefront&lt;/a&gt;&amp;lsquo;s software developer &lt;a href=&#34;https://medium.com/@chris_91497&#34;&gt;Chris Sessions&lt;/a&gt; wrote a &lt;a href=&#34;https://medium.com/livefront/practical-dynamic-type-d2b5774e8a8a&#34;&gt;helpful article&lt;/a&gt; about practical usage of Dynamic Type. This short follow-up addresses one primary concern: &lt;em&gt;Unit Testing&lt;/em&gt;.&lt;/p&gt;</description>
     </item>
     
   </channel>

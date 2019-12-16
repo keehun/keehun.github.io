@@ -55,134 +55,85 @@
                 <article itemscope itemtype="http://schema.org/BlogPosting">
                     <section class="body is-size-5" itemprop="articleBody">
                         <div class="content">
-                            <p>Have you ever needed to check if a string was made up only of digits? How about the presence of punctuation or non-alphanumeric characters? One could use a variety of methods from one of the <code>Formatter</code> classes to <code>NSScanner</code> to even <code>NSPredicate</code>, but the <a href="https://stackoverflow.com/questions/34354740/how-do-you-confirm-a-string-only-contains-numbers-in-swift/34354943">most</a> <a href="https://stackoverflow.com/questions/34587094/how-to-check-if-text-contains-only-numbers/34587234">likely</a> <a href="https://www.reddit.com/r/swift/comments/40jj5r/is_there_a_way_to_find_whether_or_not_a_character/cyun9yn/">snippet</a> you would&rsquo;ve found involved the use of an inverted <code>CharacterSet</code>.</p>
-
-<hr />
-
+                            <p>Have you ever needed to check if a string was made up only of digits? How about the presence of punctuation or non-alphanumeric characters? One could use a variety of methods from one of the <code>Formatter</code> classes to <code>NSScanner</code> to even <code>NSPredicate</code>, but the <a href="https://stackoverflow.com/questions/34354740/how-do-you-confirm-a-string-only-contains-numbers-in-swift/34354943">most</a> <a href="https://stackoverflow.com/questions/34587094/how-to-check-if-text-contains-only-numbers/34587234">likely</a> <a href="https://www.reddit.com/r/swift/comments/40jj5r/is_there_a_way_to_find_whether_or_not_a_character/cyun9yn/">snippet</a> you would've found involved the use of an inverted <code>CharacterSet</code>.</p>
+<hr>
 <p><em>tldr: click <a href="https://keehun.github.io/CharacterSetArticle/">here</a> to see all the characters in <code>CharacterSet.decimalDigits</code></em></p>
-
-<p>In brief summary, <code>CharacterSet</code> is an Objective-C-bridged Swift class that represents a set of Unicode characters. Its Objective-C counterpart, <code>NSCharacterSet</code> is itself toll-free bridged with Core Foundation&rsquo;s <code>CFCharacterSet</code>. Written in C, <code>CFCharacterSet</code> is quite old, dating back to at least Mac OS 8. The main idea behind <code>CFCharacterSet</code> is to provide an Unicode-aware data structure that aids in the efficient searching of Unicode strings. Both <code>NSString</code> and <code>NSScanner</code> internally use <code>NSCharacterSet</code> for their string searching operations.</p>
-
+<p>In brief summary, <code>CharacterSet</code> is an Objective-C-bridged Swift class that represents a set of Unicode characters. Its Objective-C counterpart, <code>NSCharacterSet</code> is itself toll-free bridged with Core Foundation's <code>CFCharacterSet</code>. Written in C, <code>CFCharacterSet</code> is quite old, dating back to at least Mac OS 8. The main idea behind <code>CFCharacterSet</code> is to provide an Unicode-aware data structure that aids in the efficient searching of Unicode strings. Both <code>NSString</code> and <code>NSScanner</code> internally use <code>NSCharacterSet</code> for their string searching operations.</p>
 <p><code>CharacterSet</code> can be initialized as an empty set or from a set of characters present within a string, bytes, or the contents of a file. It comes with many conveniently predefined sets (such as the <a href="https://developer.apple.com/documentation/foundation/characterset/1779972-urlfragmentallowed">characters allowed in a URL query fragment</a> or <a href="https://developer.apple.com/documentation/foundation/characterset/1779632-alphanumerics">alphanumeric characters</a>) and even allows set algebra such as union, intersection, and exclusive-or.</p>
-
-<p>Using one of <code>CharacterSet</code>&rsquo;s predefined sets feels convenient:</p>
-
-<script src="https://gist.github.com/keehun/c3a32b19734abbe460c2f9b1fe4e162b.js"></script>
-
-<p>Let’s take a step back and look at the code above. <strong>How do you know exactly which characters are included in .decimalDigits?</strong><sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> If the snippet above was validating untrusted user input for numerical characters (such as a phone PIN), not knowing exactly which characters belong in <code>CharacterSet.decimalDigits</code> could have substantial security implications as well as creating bugs and other undefined behavior. Let&rsquo;s better understand predefined character sets.</p>
-
+<p>Using one of <code>CharacterSet</code>'s predefined sets feels convenient:</p>
+<!-- raw HTML omitted -->
+<p>Let’s take a step back and look at the code above. <strong>How do you know exactly which characters are included in .decimalDigits?</strong><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> If the snippet above was validating untrusted user input for numerical characters (such as a phone PIN), not knowing exactly which characters belong in <code>CharacterSet.decimalDigits</code> could have substantial security implications as well as creating bugs and other undefined behavior. Let's better understand predefined character sets.</p>
 <h3 id="what-is-in-a-predefined-characterset">What is in a predefined CharacterSet?</h3>
-
 <p>Unfortunately, <code>print()</code> does not work on <code>CharacterSet</code>:</p>
-
-<script src="https://gist.github.com/keehun/a5af551a7efefa74e222330bb21a32bd.js"></script>
-
+<!-- raw HTML omitted -->
 <p>(This log output can be traced back to the original <code>CFCharacterSet</code>. Take a look yourself at line 892 of the <a href="https://opensource.apple.com/source/CF/CF-299/String.subproj/CFCharacterSet.c!">earliest publicly available source code for <code>CFCharacterSet</code></a></p>
-
-<p>Unfortunately, there is no convenient, built-in way to enumerate over the contents of <code>CharacterSet</code>, so let&rsquo;s create our own! In order to do that, we will need some working knowledge of Unicode.</p>
-
+<p>Unfortunately, there is no convenient, built-in way to enumerate over the contents of <code>CharacterSet</code>, so let's create our own! In order to do that, we will need some working knowledge of Unicode.</p>
 <h3 id="basic-understanding-of-unicode">Basic Understanding of Unicode</h3>
-
 <h4 id="utf8-and-utf16">UTF8 and UTF16</h4>
-
 <p>Unicode is a text-encoding standard that became necessary as many non-English speaking parts of the world became connected to the World Wide Web. It defines three structures that are relevant to us: UTF8, UTF16, and UTF32. The number at the end of those three names represent the size of their <em>code units</em>. A <em>code unit</em> is a short block of bits that, when combined, represent characters. UTF8 has 8-bit <em>code units</em> and UTF16 has 16-bit <em>code units</em>.</p>
-
 <p>UTF8 and UTF16 are considered <em>variable width</em> meaning that one UTF8 character may be represented by up to four 8-bit code units (and two 16-bit code units for UTF16). Consider these two examples of UTF8 characters:</p>
-
 
 <figure>
 	<img src="/understanding-swifts-characterset/utf-diagram.png" alt="How an UTF8 character gets converted to-and-from its code point." />
 	<figcaption>How an UTF8 character gets converted to-and-from its code point.</figcaption>
 </figure>
-
-<p><center>See footnote <sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup> for more details</center></p>
-
+<!-- raw HTML omitted -->
 <h4 id="utf32">UTF32</h4>
-
-<p>Notice that both four 8-bits and two 16-bits both add up to 32-bits. This is entirely by design: UTF32 is a <em>fixed width</em> format into which UTF8 and UTF16 can easily fit without any extra work. All UTF32 characters contain 32 bits, even if it’s not necessary. This makes for an inefficient format, but there is <em>one benefit</em>: it is <strong>great</strong> for searching because you can iterate over every 32nd bit to get the next character instead of decoding every byte to decode the code point width of that character. This is precisely the reason why <code>NSCharacterSet.characterIsMember(UTF8 or UTF16 or UTF32)</code> internally calls <code>longCharacterIsMember(UTF32)</code> which only accepts a UTF32 character.<sup class="footnote-ref" id="fnref:3"><a href="#fn:3">3</a></sup></p>
-
+<p>Notice that both four 8-bits and two 16-bits both add up to 32-bits. This is entirely by design: UTF32 is a <em>fixed width</em> format into which UTF8 and UTF16 can easily fit without any extra work. All UTF32 characters contain 32 bits, even if it’s not necessary. This makes for an inefficient format, but there is <em>one benefit</em>: it is <strong>great</strong> for searching because you can iterate over every 32nd bit to get the next character instead of decoding every byte to decode the code point width of that character. This is precisely the reason why <code>NSCharacterSet.characterIsMember(UTF8 or UTF16 or UTF32)</code> internally calls <code>longCharacterIsMember(UTF32)</code> which only accepts a UTF32 character.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
 <h3 id="characterset-and-utf32">CharacterSet and UTF32</h3>
-
-<p>The best way to search the membership of a character within <code>CharacterSet</code> is to get the UTF32 code point for that character and pass it to <code>NSCharacterSet</code>&rsquo;s <code>longCharacterIsMember()</code>. It looks like this:</p>
-
-<script src="https://gist.github.com/keehun/4a2b981168d2b592d7653de197b2eb87.js"></script>
-
-<h3 id="what-s-inside-characterset-decimaldigits">What’s Inside CharacterSet.decimalDigits?</h3>
-
-<p>Let’s go back to our original goal: to see what is inside of <code>CharacterSet.decimalDigits</code>. Here is an example of why it&rsquo;s so important to understand what&rsquo;s inside of it:</p>
-
-<script src="https://gist.github.com/keehun/78da2bac4cae86a6f2e0b7c8f144c882.js"></script>
-
+<p>The best way to search the membership of a character within <code>CharacterSet</code> is to get the UTF32 code point for that character and pass it to <code>NSCharacterSet</code>'s <code>longCharacterIsMember()</code>. It looks like this:</p>
+<!-- raw HTML omitted -->
+<h3 id="whats-inside-charactersetdecimaldigits">What’s Inside CharacterSet.decimalDigits?</h3>
+<p>Let’s go back to our original goal: to see what is inside of <code>CharacterSet.decimalDigits</code>. Here is an example of why it's so important to understand what's inside of it:</p>
+<!-- raw HTML omitted -->
 <p><em><strong>Given above, do you think “᧐᪂᧐” will be considered numerical?</strong></em></p>
-
-<hr />
-
+<hr>
 
 <figure>
 	<img src="/understanding-swifts-characterset/chrome-support.png" alt="Readers on Chrome, this is what you would be seeing on Firefox or Safari." />
 	<figcaption>Readers on Chrome, this is what you would be seeing on Firefox or Safari.</figcaption>
 </figure>
-
-<hr />
-
+<hr>
 <p><em><strong>What?</strong></em> I did not expect that ᧐᪂᧐ would evaluate as numerical characters. Let’s explore further to understand <em>why</em>.</p>
-
 <h3 id="printing-the-contents-of-characterset">Printing the Contents of CharacterSet</h3>
-
-<p>Armed with how Unicode works for <code>CharacterSet</code>, let&rsquo;s write some code to print the contents of <code>CharacterSet</code>.<sup class="footnote-ref" id="fnref:4"><a href="#fn:4">4</a></sup> Because <code>NSCharacterSet</code> only provides a way to check if an UTF32 character is a member in the set, we will have to loop through every possible UTF32 character and check for their membership in the set:</p>
-
-<script src="https://gist.github.com/keehun/98db4a3014d4e171c1e5a0f9647da1ac.js"></script>
-
-<p>And if you ran that in <a href="https://github.com/keehun/CharacterSetArticle">Xcode Swift Playgrounds</a> (or <a href="https://repl.it/@keehun/CharacterSet-Article-Demo">here on repl.it</a>), these are the characters that you would see.<sup class="footnote-ref" id="fnref:5"><a href="#fn:5">5</a></sup></p>
-
-<h3 id="so-what-about-᧐᪂᧐">So, What About ᧐᪂᧐?</h3>
-
+<p>Armed with how Unicode works for <code>CharacterSet</code>, let's write some code to print the contents of <code>CharacterSet</code>.<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> Because <code>NSCharacterSet</code> only provides a way to check if an UTF32 character is a member in the set, we will have to loop through every possible UTF32 character and check for their membership in the set:</p>
+<!-- raw HTML omitted -->
+<p>And if you ran that in <a href="https://github.com/keehun/CharacterSetArticle">Xcode Swift Playgrounds</a> (or <a href="https://repl.it/@keehun/CharacterSet-Article-Demo">here on repl.it</a>), these are the characters that you would see.<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
+<h3 id="so-what-about-">So, What About ᧐᪂᧐?</h3>
 <p>It turns out that those characters are numerical digits in other writing systems. The <a href="http://www.unicode-symbol.com/u/19D0.html">᧐</a> is the character for “zero” in the <a href="https://en.wikipedia.org/wiki/New_Tai_Lue_alphabet">New Tai Lue alphabet</a>. The <a href="http://www.unicode-symbol.com/u/1A82.html">᪂</a> is the character for “two” used in the <a href="https://en.wikipedia.org/wiki/Tai_Tham_script">Tai Tham script</a>.</p>
-
 <p>I encourage you to find other <code>CharacterSets</code> to explore!</p>
-
 <p>Thanks to <a href="https://github.com/dwsolberg/">David Solberg</a> for the inspiration.</p>
-
-<hr />
-
+<hr>
 <h3 id="footnotes">Footnotes</h3>
-
 <h4 id="knowing-the-standardized-utf8-bit-structure">Knowing the Standardized UTF8 Bit Structure</h4>
-
 
 <figure>
 	<img src="/understanding-swifts-characterset/utf8-structure.png" alt="The UTF8 variable-width structure" />
 	<figcaption>The UTF8 variable-width structure</figcaption>
 </figure>
-
 <p>Here’s how to translate the character’s code point value to UTF8 binary: Fill in all the <code>x</code>s in the table above with the binary value for the character.</p>
-
 <p>To figure out how many bytes are needed, consider the length of the character’s code point in binary. 1-byte UTF8 can only accommodate 7 bits (only 7 <code>x</code>s in the table). A 2-byte UTF8 can accommodate 11 bits. 3-bytes can accommodate 16 bits, and a 4-byte UTF8 can accommodate 21 bits.</p>
-
-<p>For the &ldquo;€&rdquo; character (U+20AC <code>10 0000 1010 1100</code>), we need at least 14 bits meaning it will need the 3-byte structure which can accommodate between 12 and 16 bits. The binary digits filled into the UTF8 structure looks like this: <code>1110<strong>0010</strong> 10<strong>000010</strong> 10<strong>101100</strong></code> (with the code point in <code><strong>bold</strong></code>).</p>
-
+<p>For the &ldquo;€&rdquo; character (U+20AC <code>10 0000 1010 1100</code>), we need at least 14 bits meaning it will need the 3-byte structure which can accommodate between 12 and 16 bits. The binary digits filled into the UTF8 structure looks like this: <!-- raw HTML omitted -->1110<strong>0010</strong> 10<strong>000010</strong> 10<strong>101100</strong><!-- raw HTML omitted --> (with the code point in <!-- raw HTML omitted --><strong>bold</strong><!-- raw HTML omitted -->).</p>
 <p>Notice that if you take away the non-bold binary digits, you get back the original binary for the &ldquo;€&rdquo; character!</p>
-
 <p>The first byte in a 3-bite-long UTF8 character always begins with <code>1110</code>. This is how the UTF8 decoder knows the number of following bytes belong to the same character in the data stream.</p>
-
 <p>Thanks to Andrew Haisting and Sam Kirchmeier for their editorial feedback!</p>
-<div class="footnotes">
-
-<hr />
-
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:1">Apple does provide exact code points of characters in certain sets such as <code>.whitespacesAndNewlines</code> and <code>.newlines</code>, but for most other sets, the documentation only describes the Unicode General Category represented by the set, which may not be particularly helpful (e.g. Apple states that the <code>.alphanumerics</code> set contains “Unicode General Categories L*, M*, and N*”). <a href="https://www.fileformat.info/info/unicode/category/index.htm">This website</a> (among others) does provide a sorted list of Unicode General Categories and their characters which I find slow to use.
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-<li id="fn:2">Here’s how to translate the character’s code point value to UTF8 binary:
- <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
-<li id="fn:3">See line 1655 of <a href="https://opensource.apple.com/source/CF/CF-299/String.subproj/CFCharacterSet.c">CFCharacterSet.c</a>
- <a class="footnote-return" href="#fnref:3"><sup>[return]</sup></a></li>
-<li id="fn:4">I do <em>not</em> recommend using this code for any production apps, or in any apps <em>ever</em>. The provided <code>NSCharacterSet</code> extension is only meant to be used educationally. The code is slow, and some predefined sets are <em>huge</em> (e.g. the <code>.alphanumerics</code> set contains 24,146 characters).
- <a class="footnote-return" href="#fnref:4"><sup>[return]</sup></a></li>
-<li id="fn:5">Again, I don’t recommend using the <code>NSCharacterSet</code> extension in production, <em>ever</em>.
- <a class="footnote-return" href="#fnref:5"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+<p>Apple does provide exact code points of characters in certain sets such as <code>.whitespacesAndNewlines</code> and <code>.newlines</code>, but for most other sets, the documentation only describes the Unicode General Category represented by the set, which may not be particularly helpful (e.g. Apple states that the <code>.alphanumerics</code> set contains “Unicode General Categories L*, M*, and N*”). <a href="https://www.fileformat.info/info/unicode/category/index.htm">This website</a> (among others) does provide a sorted list of Unicode General Categories and their characters which I find slow to use. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>See line 1655 of <a href="https://opensource.apple.com/source/CF/CF-299/String.subproj/CFCharacterSet.c">CFCharacterSet.c</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>I do <em>not</em> recommend using this code for any production apps, or in any apps <em>ever</em>. The provided <code>NSCharacterSet</code> extension is only meant to be used educationally. The code is slow, and some predefined sets are <em>huge</em> (e.g. the <code>.alphanumerics</code> set contains 24,146 characters). <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>Again, I don’t recommend using the <code>NSCharacterSet</code> extension in production, <em>ever</em>. <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
                         </div>
                     </section>
                 </article>
